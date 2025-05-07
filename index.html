@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Congrau - Plataforma Teste</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+    body {
+      background-color: #f3f4f6;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      flex-direction: column;
+    }
+    .card {
+      background: white;
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      width: 90%;
+      max-width: 400px;
+      text-align: center;
+    }
+    input {
+      width: 100%;
+      padding: 10px;
+      margin-top: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+    }
+    button {
+      margin-top: 1.5rem;
+      padding: 12px;
+      width: 100%;
+      background-color: #2563eb;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #1d4ed8;
+    }
+    .hidden {
+      display: none;
+    }
+    .dashboard button {
+      margin-top: 1rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="card" id="login">
+    <h2>Login Congrau</h2>
+    <input type="text" id="username" placeholder="Utilizador">
+    <input type="password" id="password" placeholder="Senha">
+    <button onclick="entrar()">Entrar</button>
+  </div>
+
+  <div class="card hidden" id="dashboard">
+    <h2>Bem-vindo(a)!</h2>
+    <button onclick="alert('Funcionalidade de entrada simulada')">Registrar Entrada</button>
+    <button onclick="alert('Funcionalidade de saída simulada')">Registrar Saída</button>
+    <button onclick="alert('Relatórios ainda em desenvolvimento')">Visualizar Relatórios</button>
+    <button onclick="logout()" style="background:#ef4444;">Terminar Sessão</button>
+  </div>
+
+  <script>
+    function entrar() {
+      const user = document.getElementById('username').value;
+      const pass = document.getElementById('password').value;
+
+      if(user === 'admin' && pass === '1234') {
+        localStorage.setItem('logado', 'true');
+        document.getElementById('login').classList.add('hidden');
+        document.getElementById('dashboard').classList.remove('hidden');
+      } else {
+        alert('Credenciais inválidas. Tente admin / 1234.');
+      }
+    }
+
+    function logout() {
+      localStorage.removeItem('logado');
+      document.getElementById('login').classList.remove('hidden');
+      document.getElementById('dashboard').classList.add('hidden');
+    }
+
+    window.onload = () => {
+      if(localStorage.getItem('logado')) {
+        document.getElementById('login').classList.add('hidden');
+        document.getElementById('dashboard').classList.remove('hidden');
+      }
+    }
+  </script>
+</body>
+</html>
